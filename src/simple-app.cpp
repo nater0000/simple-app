@@ -3,76 +3,56 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include "framework.h"
 #include "simple-app.h"
 #include "webui.hpp"
+#include "html.h"
+#include <chrono>
+#include <format>
 
 using std::string;
 using std::cout;
 using std::endl;
 using std::streambuf;
 using std::ofstream;
+using std::ifstream;
+using std::ostringstream;
+using std::chrono::duration_cast;
+using std::chrono::steady_clock;
+using std::chrono::milliseconds;
+using std::format;
 
 #define MAX_LOADSTRING (100)
+#define MAX_LOADSTRING_300 (300)
 
-const string _HtmlHelloWorld = R"(<html><head><script src=\"webui.js\"></script></head> C++ Hello World ! </html>)";
+#define WINDOW_WIDTH_DEFAULT (600)
+#define WINDOW_HEIGHT_DEFAULT (900)
 
-const string _HtmlMain = R"(
-      <html>
-        <head>
-          <meta charset="UTF-8">
-          <script src="webui.js"></script>
-
-          <title>BLE Info</title>
-          <style>
-            body {
-              background: linear-gradient(to left, #36265a, #654da9);
-              color: AliceBlue;
-              font-size: 16px sans-serif;
-              text-align: center;
-              margin-top: 30px;
-            }
-            button {
-              margin: 5px 0 10px;
-            }
-          </style>
-        </head>
-        <body>
-          <h1>Displaying BLE Info</h1>
-          <p>(<em>loading ...</em>)</p>
-          <button onclick="RefreshButtonHandlerJS();">Refresh</button>
-          <br>
-          <p>Call a C++ function that returns a response</p>
-          <div>Query: <input type="text" id="IndexTrackerDiv" value="0">
-          <button onclick="IndexButtonHandlerJS();">Query Status</button>
-            </div>
-          <script>
-            function IndexButtonHandlerJS() {
-                webui.call('RefreshButtonHandler', 'Hello');
-            }
-            function IndexButtonHandlerJS() {
-              const indexInput = document.getElementById('IndexTrackerDiv');
-              const number = indexInput.value;
-              webui.call('IndexButtonHandler', number, 2).then((response) => {
-                indexInput.value = response;
-              });
-            }
-          </script>
-        </body>
-      </html>
-    )";
 
 struct MainParams {
     string name;
     ofstream logFileH;
     streambuf* restoreCout;
     string htmlPath;
+    string htmlFilename;
 };
 MainParams _gParams;
 
+#include <map>
+#include <list>
+#include <queue>
+using std::map;
+using std::list;
+using std::queue;
+
+typedef map<string, queue<string>> ParamMap;
+ParamMap _p;
+
+
 string generateHtml_Main(const MainParams& m)
 {
-    string html = _HtmlMain;
+    string html = getDevHtml();
     // @TODO: Update html with params
     return html;
 }
@@ -108,50 +88,58 @@ string getUserName()
 #endif //
 }
 
-bool isValidPath(string path)
+// Get the horizontal and vertical screen sizes in pixel
+void GetDesktopResolution(int& horizontal, int& vertical)
 {
-    // @TODO: 
-    return false;
+#ifdef WIN32
+    RECT desktop;
+    // Get a handle to the desktop window
+    const HWND hDesktop = GetDesktopWindow();
+    // Get the size of screen to the variable desktop
+    GetWindowRect(hDesktop, &desktop);
+    // The top left corner will have coordinates (0,0)
+    // and the bottom right corner will have coordinates
+    // (horizontal, vertical)
+    horizontal = desktop.right;
+    vertical = desktop.bottom;
+#else
+
+#endif //
 }
 
-string sanitizePath(string path)
-{
-    // @TODO: 
-    return path;
-}
-
-string getHtmlPath()
+string GetAppDir()
 {
     // Use the HTML_DIR environment variable if it is set
     //  to determine the working directory
-    const string indexPage = "index.html";
 
-    string userPath = "\\html\\";
+    string appdataPath = "";
 #ifdef WIN32
     size_t ret = 0;
+    errno_t err = 0;
     char buffer[MAX_LOADSTRING] = { 0 };
     size_t bufferSize = sizeof(buffer);
-    errno_t err = getenv_s(&ret, buffer, bufferSize, "HTML_PATH");
-    if (ret > 0 && 0 == err) {
-        userPath = buffer;
-    }
-#else
-    string envPath = getenv("HTML_PATH");
-#endif // WIN32
-
-    string cleanPath = sanitizePath(userPath);
-    if (isValidPath(cleanPath)) {
-        return cleanPath + indexPage;
-    }
 
     // Fallback to using the current directory
-#ifdef WIN32
-	GetCurrentDirectoryA(MAX_LOADSTRING, buffer);
-	return string(buffer) + string("\\") + indexPage;
+    DWORD result = GetCurrentDirectoryA(MAX_LOADSTRING, buffer);
+    if (0 == result) {
+        appdataPath = buffer;
+    }
+
+    err = getenv_s(&ret, buffer, bufferSize, "APPDATA");
+    if (ret > 0 && 0 == err) {
+        appdataPath = string(buffer) + "\\Simple-App";
+    }
+
+    err = getenv_s(&ret, buffer, bufferSize, "HTML_PATH");
+    if (ret > 0 && 0 == err) {
+        appdataPath = buffer;
+    }
+
+#else
+    appdataPath = getenv("HTML_PATH");
 #endif // WIN32
 
-    // @TODO: Check non-win32
-    return "";
+    return appdataPath;
 }
 
 void handleIndex(webui::window::event* e) {
@@ -159,9 +147,15 @@ void handleIndex(webui::window::event* e) {
     // JavaScript:
     // webui.call('MyID_Four', number, 2).then(...)
 
-    long long number = e->get_int(0);
+    //long long number = e->get_int(0);
+    size_t tailLen = 0;
+    string numberMs = e->get_string(0);
+    if (numberMs.ends_with("ms")) {
+        tailLen = 2;
+    }
     long long times = e->get_int(1);
-
+    char* end = (char*)(numberMs.c_str() + (numberMs.length() - tailLen));
+    long long number = strtoll(numberMs.c_str(), &end, 10);
     long long res = number * times;
 
     cout << "handleIndex: " << number << " * " << times << " = " << res << std::endl;
@@ -180,6 +174,7 @@ void handleWebEvents(webui::window::event* e)
         break;
     case WEBUI_EVENT_DISCONNECTED:
         cout << "Disconnected" << endl;
+        e->get_window().close();
         break;
     //
     // The CLICK event is received after the onClickButton()
@@ -224,28 +219,70 @@ int invokeUiMain(_In_ LPWSTR    lpCmdLine,
 
     setupCout();
 
-    webui::window my_window{};
-
-    // This does not seem to work properly at the moment
-    if (nCmdShow == SW_HIDE) {
-        my_window.set_hide(true);
-    }
-    else {
-        my_window.set_hide(false);
-    }
-
-    my_window.bind("", handleWebEvents);
-    my_window.bind("RefreshButtonHandler", handleRefresh);
-    my_window.bind("IndexButtonHandler", handleIndex);
-
     _gParams.name = getUserName();
-    _gParams.htmlPath = getHtmlPath();
+    //_gParams.htmlPath = getHtmlPath();
 
     //string mainHtml = generateHtml_Main(_gParams);
 
-    webui::set_timeout(1);
-    my_window.show(_gParams.htmlPath); // my_window.show_browser("index.html", Chrome);
+    string contentToShow = "index.html";
+    if (_gParams.htmlFilename.size()) {
+        //taking file as inputstream
+        ifstream f(_gParams.htmlFilename);
+        if (f) {
+            ostringstream ss;
+            ss << f.rdbuf(); // reading data
+            contentToShow = ss.str();
+        }
+    }
+
+    webui::window my_window{};
+    // @TODO: Separate webserver API from window API
+    const webui::window& webserver = my_window;
+
+    //my_window.set_root_folder(_gParams.htmlPath);
+
+    my_window.bind("", handleWebEvents);
+    my_window.bind("RefreshButtonHandler", handleRefresh);
+    my_window.bind("JsBtnDouble", handleIndex);
+
+    //webui::set_timeout(1);
+    int width = WINDOW_WIDTH_DEFAULT;
+    int height = WINDOW_HEIGHT_DEFAULT;
+    my_window.set_size(width, height);
+
+    int horizontal = 0;
+    int vertical = 0;
+    GetDesktopResolution(horizontal, vertical);
+
+    my_window.set_position(horizontal - width - 100, vertical - height - 100);
+
+    //my_window.show("index.html"); // my_window.show_browser("index.html", Chrome);
+    //my_window.show(_gParams.htmlPath); // my_window.show_browser("index.html", Chrome);
+    //my_window.show("%APPDATA%\\index.html"); // my_window.show_browser("index.html", Chrome);
+    //my_window.show("C://Users//Ace01//AppData//Roaming//index.html"); // my_window.show_browser("index.html", Chrome);
     //my_window.show(mainHtml);
+
+    // This does not seem to work properly at the moment
+    if (nCmdShow == SW_HIDE) {
+        //my_window.set_hide(true);
+    }
+    else {
+        //my_window.set_hide(false);
+    }
+
+    const char* const setPropertyStr = "document.getElementById('{}').{} = '{}';";
+
+    webserver.set_root_folder(GetAppDir());
+    //webserver.validate_required({ "index.html", "404.html" });
+    my_window.show("index.html");
+    auto tStart = steady_clock::now();
+    for ( ; my_window.is_shown(); ) {
+        auto tNow = steady_clock::now();
+        auto durMs = duration_cast<milliseconds>(tNow - tStart);
+        auto js = format(setPropertyStr, "ElementId", "value", durMs);
+        my_window.run(js);
+        Sleep(100);
+    }
 
     webui::wait();
     webui::clean();
