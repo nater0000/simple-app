@@ -163,6 +163,7 @@
     <ClInclude Include="..\src\resource.h" />
     <ClInclude Include="..\src\simple-app.h" />
     <ClInclude Include="..\src\targetver.h" />
+    <ClInclude Include="..\src\win32_window.h" />
     <ClInclude Include="..\vendor\webui\src\include\webui.h" />
     <ClInclude Include="..\vendor\webui\src\include\webui.hpp" />
   </ItemGroup>
@@ -172,6 +173,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\src\simple-app.cpp" />
+    <ClCompile Include="..\src\win32_window.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\vendor\webui\src\webui\webui.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
