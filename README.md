@@ -1,6 +1,7 @@
 # simple-app
 
 This is currently based on a MSVC sample app.
+Updated to a flashy demo GUI by @JadeZaher (https://github.com/JadeZaher/NathanCDudeHelp)
 Updated with webui C++ wrapper and a busy loop invoking a javascript function to interact with the site.
 Using civetweb (via webui), we can run an entire website from a local directory (or more elaborate backend features with effort).
 Updated with a Webview (https://github.com/webview/webview) front end component. This may get removed or replaced.
@@ -11,15 +12,20 @@ Note that one expectation for this project is to make this work cross-platform v
 
 
 ### TODO
-- Make a prettier gui
-x Push to git
-x Separate webserver API from window API
+- Integrate webui build into project
+- Fix current build issues due to external dependencies
+- [Feature] Add 'Press any key': C++ input handler
+- [Feature] Add 'Press any key': next.html
+- Refactor initialization into an interface
+- Create a new repo for MSI packager
 - Impl write index (+subdir) to appdata [bin2cpp]
 - Compile index (+subdir) into binary [bin2cpp]
+x Make a prettier gui
+x Push to git
+x Separate webserver API from window API
 x Integrate refactored webui [depends on webui fork+modify]
 y Integrate webview (chromium) [using MS Webview2 instead]
 n Modify webui build scripts
-- Integrate webui build into project
 x Refactor .sln,.vcproj into ./scripts/
 x Refactor ./src/website/* into ./website/*
 - Refactor Windows Resource into platform-specific feature
