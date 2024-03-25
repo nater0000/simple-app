@@ -15,7 +15,7 @@ build/
 *.obj
 
 # Shared objects (inc. Windows DLLs)
-*.dll
+#*.dll
 *.so
 *.so.*
 *.dylib
@@ -23,8 +23,8 @@ build/
 # Compiled Static libraries
 *.lai
 *.la
-*.a
-*.lib
+#*.a
+#*.lib
 
 # Logs
 *.log
