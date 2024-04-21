@@ -38,9 +38,6 @@ struct MainParams {
     string name;
     ofstream logFileH;
     streambuf* restoreCout;
-    string htmlPath;
-    string htmlFilename;
-    HWND hWnd;
 };
 MainParams _gParams;
 
