@@ -65,6 +65,7 @@
     #define WEBUI_FILE_EXIST      _access
     #define WEBUI_POPEN           _popen
     #define WEBUI_PCLOSE          _pclose
+    #define WEBUI_STRDUP          _strdup
     #define WEBUI_MAX_PATH        MAX_PATH
 #endif
 

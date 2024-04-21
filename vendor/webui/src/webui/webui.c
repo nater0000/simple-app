@@ -3041,7 +3041,7 @@ static char* _webui_get_file_name_from_url(const char* url) {
     }
 
     // Copy the path to a new string
-    char* file = strdup(pos);
+    char* file = WEBUI_STRDUP(pos);
 
     // Find the position of the first '?'
     char* question_mark = strchr(file, '?');
