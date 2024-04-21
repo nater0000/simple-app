@@ -1,6 +1,11 @@
 # simple-app
+Simple App is reclaiming complex web interfaces for low level programmers.
+Build a sophisticated UI using web technologies including html, css, javascript, then launch it inside a simple C++ application with no internet connection or external dependencies required in a re-distributable 1 megabyte exe (not including the size of the UI files).
+This is accomplished by filling the Window with a Microsoft WebView2 win32 component, and navigating the view to a local 'index.html' which is retrieved through an embedded civetweb C web and websocket server.
+Optionally, by injecting uiweb's javascript websocket server into 'index.html' a new layer of application interactions become available that could not exist on a website.
 
-This is currently based on a MSVC sample app.
+### Notes
+This app is based on the Microsoft Visual Studio C++ template.
 Updated to a flashy demo GUI by @JadeZaher (https://github.com/JadeZaher/NathanCDudeHelp)
 Updated with webui C++ wrapper and a busy loop invoking a javascript function to interact with the site.
 Using civetweb (via webui), we can run an entire website from a local directory (or more elaborate backend features with effort).
