@@ -1103,7 +1103,7 @@ size_t webui_bind(size_t window, const char* element, void( * func)(webui_event_
         return 0;
     _webui_window_t * win = _webui_core.wins[window];
 
-    int len = 0;
+    size_t len = 0;
     if (_webui_is_empty(element))
         win->has_events = true;
     else
@@ -1364,7 +1364,7 @@ void webui_return_string(webui_event_t* e, const char* s) {
         _webui_free_mem((void * ) event_inf->response);
 
     // Copy Str
-    int len = _webui_strlen(s);
+    size_t len = _webui_strlen(s);
     char* buf = (char*)_webui_malloc(len);
     memcpy(buf, s, len);
 
@@ -1566,6 +1566,23 @@ bool webui_set_tls_certificate(const char* certificate_pem, const char* private_
     #endif
 
     return false;
+}
+
+size_t webui_get_port(size_t window) {
+
+#ifdef WEBUI_LOG
+    printf("[User] webui_get_port([%zu])...\n", window);
+#endif
+
+    // Initialization
+    _webui_init();
+
+    // Dereference
+    if (_webui_mtx_is_exit_now(WEBUI_MUTEX_NONE) || _webui_core.wins[window] == NULL)
+        return 0;
+    _webui_window_t* win = _webui_core.wins[window];
+
+    return win->server_port;
 }
 
 bool webui_set_port(size_t window, size_t port) {
@@ -2573,7 +2590,7 @@ static void _webui_free_mem(void * ptr) {
         }
     }
 
-    for (int i = _webui_core.ptr_position; i >= 0; i--) {
+    for (size_t i = _webui_core.ptr_position; i >= 0; i--) {
 
         if (_webui_core.ptr_list[i] == NULL) {
 
@@ -3103,7 +3120,7 @@ static int _webui_serve_file(_webui_window_t * win, struct mg_connection * conn)
             // File content found (200)
 
             if (length == 0)
-                length = strlen((const char*)data);
+                length = (int)strlen((const char*)data);
 
             // Send header
             int header_ret = mg_send_http_ok(
@@ -5375,7 +5392,11 @@ static bool _webui_is_process_running(const char* process_name) {
         return false;
     }
     do {
-        if (strcmp(pe32.szExeFile, process_name) == 0) {
+#define ARR_SIZE(arr) (sizeof(arr)/sizeof(arr[0]))
+        wchar_t wprocess_name[ ARR_SIZE(pe32.szExeFile) ];
+        swprintf(wprocess_name, ARR_SIZE(pe32.szExeFile), L"%hs", process_name);
+
+        if (wcscmp(pe32.szExeFile, wprocess_name) == 0) {
             isRunning = true;
             break;
         }
@@ -6167,7 +6188,7 @@ static void _webui_init(void) {
 
     // Random
     #ifdef _WIN32
-    srand((size_t) time(NULL));
+    srand((unsigned int) time(NULL));
     #else
     srand(time(NULL));
     #endif
@@ -6891,8 +6912,8 @@ static WEBUI_THREAD_SERVER_START {
 
                             win->file_handled = false;
 
-                            _webui_timer_t timer_2;
-                            _webui_timer_start( & timer_2);
+                            //_webui_timer_t timer_2;
+                            //_webui_timer_start( & timer_2);
                             for (;;) {
 
                                 // Stop if window is connected
@@ -6901,8 +6922,8 @@ static WEBUI_THREAD_SERVER_START {
                                     break;
 
                                 // Stop if timer is finished
-                                if (_webui_timer_is_end( & timer_2, 3000))
-                                    break;
+                                //if (_webui_timer_is_end( & timer_2, 3000))
+                                //    break;
                             }
                         } while(win->file_handled && !_webui_mtx_is_connected(win, WEBUI_MUTEX_NONE));
                     }
@@ -6957,8 +6978,8 @@ static WEBUI_THREAD_SERVER_START {
 
                                 win->file_handled = false;
 
-                                _webui_timer_t timer_3;
-                                _webui_timer_start( & timer_3);
+                                //_webui_timer_t timer_3;
+                                //_webui_timer_start( & timer_3);
                                 for (;;) {
 
                                     // Stop if window is re-connected
@@ -6967,8 +6988,8 @@ static WEBUI_THREAD_SERVER_START {
                                         break;
 
                                     // Stop if timer is finished
-                                    if (_webui_timer_is_end( & timer_3, 1000))
-                                        break;
+                                    //if (_webui_timer_is_end( & timer_3, 1000))
+                                    //    break;
                                 }
                             } while(win->file_handled && !_webui_mtx_is_connected(win, WEBUI_MUTEX_NONE));
 
@@ -7817,7 +7838,7 @@ static bool _webui_socket_test_listen_win32(size_t port_num) {
     }
 
     // Setup the TCP listening socket
-    iResult = bind(ListenSocket, result->ai_addr, (size_t) result->ai_addrlen);
+    iResult = bind(ListenSocket, result->ai_addr, (size_t) (int)result->ai_addrlen);
     if (iResult == SOCKET_ERROR) {
         freeaddrinfo(result);
         closesocket(ListenSocket);

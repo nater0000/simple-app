@@ -12841,7 +12841,7 @@ print_props(struct mg_connection *conn,
 	}
 
 	link_concat_len = strlen(uri) + strlen(name) + 1;
-	link_concat = mg_malloc_ctx(link_concat_len, conn->phys_ctx);
+	link_concat = (char*)mg_malloc_ctx(link_concat_len, conn->phys_ctx);
 	if (!link_concat) {
 		return 0;
 	}

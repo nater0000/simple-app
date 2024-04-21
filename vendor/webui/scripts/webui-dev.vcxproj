@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug-TLS|Win32">
+      <Configuration>Debug-TLS</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug-TLS|x64">
+      <Configuration>Debug-TLS</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release-TLS|Win32">
+      <Configuration>Release-TLS</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release-TLS|x64">
+      <Configuration>Release-TLS</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{16FAC019-CF4D-4367-8436-4414FBEA9B05}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-TLS|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-TLS|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-TLS|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-TLS|x64'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-TLS|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-TLS|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-TLS|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-TLS|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeBuildCommandLine>cd .. &amp;&amp; nmake debug</NMakeBuildCommandLine>
+    <NMakeOutput>webui-2.lib</NMakeOutput>
+    <NMakeCleanCommandLine>cd .. &amp;&amp; nmake clean-debug</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>NO_SSL;NO_CACHING;NO_CGI;USE_WEBSOCKET;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>..\src;..\src\include;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <AdditionalOptions>-D_HAS_CXX17 -std=c++20</AdditionalOptions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-TLS|x64'">
+    <NMakeBuildCommandLine>cd .. &amp;&amp; nmake debug WEBUI_USE_TLS=1 WEBUI_TLS_INCLUDE="C:\Program Files\OpenSSL-Win64-3_2_1\include" WEBUI_TLS_LIB="C:\Program Files\OpenSSL-Win64-3_2_1\lib\VC\x64\MT"</NMakeBuildCommandLine>
+    <NMakeOutput>webui-2-secure.lib</NMakeOutput>
+    <NMakeCleanCommandLine>cd .. &amp;&amp; nmake clean-debug</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>WEBUI_TLS;NO_SSL_DL;OPENSSL_API_1_1;NO_CACHING;NO_CGI;USE_WEBSOCKET;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>..\src;..\src\include;C:\Program Files\OpenSSL-Win64-3_2_1\include;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <AdditionalOptions>-D_HAS_CXX17 -std=c++20</AdditionalOptions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeBuildCommandLine>cl /Zl /Zi</NMakeBuildCommandLine>
+    <NMakeOutput>webui-2.lib</NMakeOutput>
+    <NMakeCleanCommandLine>- del *.pdb &gt;nul 2&gt;&amp;1</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>NO_SSL NO_CACHING NO_CGI, USE_WEBSOCKET;WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>/src/civetweb;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-TLS|Win32'">
+    <NMakeBuildCommandLine>cl /Zl /Zi</NMakeBuildCommandLine>
+    <NMakeOutput>webui-2.lib</NMakeOutput>
+    <NMakeCleanCommandLine>- del *.pdb &gt;nul 2&gt;&amp;1</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>NO_SSL NO_CACHING NO_CGI, USE_WEBSOCKET;WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>/src/civetweb;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeBuildCommandLine>cl /Zl /Zi</NMakeBuildCommandLine>
+    <NMakeOutput>webui-2.lib</NMakeOutput>
+    <NMakeCleanCommandLine>- del *.pdb &gt;nul 2&gt;&amp;1</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>NO_SSL NO_CACHING NO_CGI, USE_WEBSOCKET;WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>/src/civetweb;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-TLS|Win32'">
+    <NMakeBuildCommandLine>cl /Zl /Zi</NMakeBuildCommandLine>
+    <NMakeOutput>webui-2.lib</NMakeOutput>
+    <NMakeCleanCommandLine>- del *.pdb &gt;nul 2&gt;&amp;1</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>NO_SSL NO_CACHING NO_CGI, USE_WEBSOCKET;WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>/src/civetweb;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeBuildCommandLine>cd .. &amp;&amp; nmake</NMakeBuildCommandLine>
+    <NMakeOutput>webui-2.lib</NMakeOutput>
+    <NMakeCleanCommandLine>cd .. &amp;&amp; nmake clean</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>NO_SSL;NO_CACHING;NO_CGI;USE_WEBSOCKET;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>..\src;..\src\include;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <AdditionalOptions>-D_HAS_CXX17</AdditionalOptions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-TLS|x64'">
+    <NMakeBuildCommandLine>cd .. &amp;&amp; nmake WEBUI_USE_TLS=1 WEBUI_TLS_INCLUDE="C:\Program Files\OpenSSL-Win64-3_2_1\include" WEBUI_TLS_LIB="C:\Program Files\OpenSSL-Win64-3_2_1\lib\VC\x64\MT"</NMakeBuildCommandLine>
+    <NMakeOutput>webui-2-secure.lib</NMakeOutput>
+    <NMakeCleanCommandLine>cd .. &amp;&amp; nmake clean</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>WEBUI_TLS;NO_SSL_DL;OPENSSL_API_1_1;NO_CACHING;NO_CGI;USE_WEBSOCKET;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>..\src;..\src\include;C:\Program Files\OpenSSL-Win64-3_2_1\include;$(NMakeIncludeSearchPath)</NMakeIncludeSearchPath>
+    <AdditionalOptions>-D_HAS_CXX17</AdditionalOptions>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\webui\webui.c" />
+    <ClCompile Include="src\civetweb\civetweb.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\include\webui.h" />
+    <ClInclude Include="..\src\include\webui.hpp" />
+    <ClInclude Include="src\bridge\webui_bridge.h" />
+    <ClInclude Include="src\civetweb\civetweb.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\civetweb\handle_form.inl" />
+    <None Include="src\civetweb\match.inl" />
+    <None Include="src\civetweb\md5.inl" />
+    <None Include="src\civetweb\response.inl" />
+    <None Include="src\civetweb\sha1.inl" />
+    <None Include="src\civetweb\sort.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

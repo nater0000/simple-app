@@ -30,11 +30,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\webui\webui.c">
-      <Filter>Source Files\webui</Filter>
-    </ClCompile>
     <ClCompile Include="src\civetweb\civetweb.c">
       <Filter>Source Files\civetweb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\webui\webui.c">
+      <Filter>Source Files\webui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -64,10 +64,10 @@
     <ClInclude Include="src\bridge\webui_bridge.h">
       <Filter>Source Files\bridge</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\webui.h">
+    <ClInclude Include="..\src\include\webui.h">
       <Filter>Source Files\include</Filter>
     </ClInclude>
-    <ClInclude Include="src\include\webui.hpp">
+    <ClInclude Include="..\src\include\webui.hpp">
       <Filter>Source Files\include</Filter>
     </ClInclude>
   </ItemGroup>
