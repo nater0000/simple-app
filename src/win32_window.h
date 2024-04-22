@@ -183,6 +183,8 @@ public:
 
         case WM_CLOSE:
             DestroyWindow(hWnd);
+            PostQuitMessage(0);
+            exit(1);
             break;
 
         case WM_DESTROY:

@@ -28,8 +28,8 @@ using std::format;
 #define MAX_LOADSTRING (100)
 #define MAX_LOADSTRING_300 (300)
 
-#define WINDOW_WIDTH_DEFAULT (640)
-#define WINDOW_HEIGHT_DEFAULT (480)
+#define WINDOW_WIDTH_DEFAULT (720)
+#define WINDOW_HEIGHT_DEFAULT (640)
 #define WINDOW_WIDTH_MIN (1020)
 #define WINDOW_HEIGHT_MIN (400)
 
@@ -151,10 +151,16 @@ void handleIndex(webui::window::event* e) {
     long long number = strtoll(numberMs.c_str(), &end, 10);
     long long res = number * times;
 
-    cout << "handleIndex: " << number << " * " << times << " = " << res << std::endl;
+    cout << "handleIndex: " << number << " * " << times << " = " << res << endl;
 
     // Send back the response to JavaScript
     e->return_int(res);
+}
+
+void handleNextPage(webui::window::event* e)
+{
+    webui_run(e->window, "window.location.href='page2.html';");
+    //webui_navigate(e->window, "page2.html");
 }
 
 void handleWebEvents(webui::window::event* e)
@@ -321,6 +327,7 @@ int invokeUiMain(_In_ LPWSTR    lpCmdLine,
     webserver.bind("", handleWebEvents);
     webserver.bind("RefreshButtonHandler", handleRefresh);
     webserver.bind("JsBtnDouble", handleIndex);
+    webserver.bind("JsBtnNext", handleNextPage);
 
     webserver.set_root_folder(GetAppDir());
     //@TODO: Write the embedded files to disk {"index.html", "404.html", ..}
@@ -388,6 +395,7 @@ int invokeUiMain(_In_ LPWSTR    lpCmdLine,
         TranslateMessage(&msg);
         DispatchMessageW(&msg);
 
+#if 0
         auto tNow = steady_clock::now();
         auto durMs = duration_cast<milliseconds>(tNow - tLast);
 
@@ -401,6 +409,7 @@ int invokeUiMain(_In_ LPWSTR    lpCmdLine,
 
             wnd.eval(js);
         }
+#endif // 0
     }
 
     // The webserver was initialized with NoBrowser so make sure to

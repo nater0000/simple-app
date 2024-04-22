@@ -6,18 +6,18 @@
     <title>Sample Project</title>
     <link rel="stylesheet" href="style.css">
 </head>
+<script src="webui.js"></script>
 <script src="index.js"></script>
 <body>
     <!-- filter info -->
     <svg class="filter" xmlns="http://www.w3.org/2000/svg">
         <filter id="alphaPink">
-                  <feColorMatrix
-                    type="matrix"
-                    values=" 1.000  0.000  0.000  0.000  0.000 
-                             0.000  0.200  0.000  0.000  0.000 
-                             0.000  0.000  0.600  0.000  0.000 
+            <feColorMatrix type="matrix"
+                           values=" 1.000  0.000  0.000  0.000  0.000
+                             0.000  0.200  0.000  0.000  0.000
+                             0.000  0.000  0.600  0.000  0.000
                              0.000  0.000  0.000  1.000  0.000">
-                  </feColorMatrix>
+            </feColorMatrix>
         </filter>
         <filter id="alphaGreen">
             <feColorMatrix mode="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="joint" />
@@ -26,10 +26,10 @@
             <feColorMatrix mode="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="joint" />
         </filter>
         <filter id="alpha">
-            <feColorMatrix type="saturate" values="0"/>
+            <feColorMatrix type="saturate" values="0" />
         </filter>
     </svg>
-    
+
     <div id="matrix" class="matrix"></div>
     <div class="content">
         <div class="imgWrap">
@@ -37,11 +37,11 @@
             <img src="Header/SimpleAppPink.png" alt="Header" class="header pink">
             <img src="Header/SimpleAppBlue.png" alt="Header" class="header blue">
         </div>
-        <h1 class="glitch" data-glitch="Press any key to continue">Press any key to continue</h1> 
-		<button onclick="window.location.href='page2.html'">test</button>
-        <p1 class="blurbtext">
+        <h1 class="glitch" data-glitch="Press any key to continue">Press any key to continue</h1>
+        <button onclick="JsBtnNext();">test</button>
+        <p1 class="blurbtext" id="updateText">
             <br>
-            Voluptate fugiat aliqua mollit ex irure. 
+            Voluptate fugiat aliqua mollit ex irure.
             Deserunt occaecat nostrud nulla irure anim id ex.
             Ullamco cillum nostrud enim culpa dolor esse.
         </p1>
