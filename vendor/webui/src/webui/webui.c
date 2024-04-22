@@ -6912,8 +6912,8 @@ static WEBUI_THREAD_SERVER_START {
 
                             win->file_handled = false;
 
-                            //_webui_timer_t timer_2;
-                            //_webui_timer_start( & timer_2);
+                            _webui_timer_t timer_2;
+                            _webui_timer_start( & timer_2);
                             for (;;) {
 
                                 // Stop if window is connected
@@ -6922,8 +6922,8 @@ static WEBUI_THREAD_SERVER_START {
                                     break;
 
                                 // Stop if timer is finished
-                                //if (_webui_timer_is_end( & timer_2, 3000))
-                                //    break;
+                                if (_webui_timer_is_end( & timer_2, 3000))
+                                    break;
                             }
                         } while(win->file_handled && !_webui_mtx_is_connected(win, WEBUI_MUTEX_NONE));
                     }
@@ -6978,8 +6978,8 @@ static WEBUI_THREAD_SERVER_START {
 
                                 win->file_handled = false;
 
-                                //_webui_timer_t timer_3;
-                                //_webui_timer_start( & timer_3);
+                                _webui_timer_t timer_3;
+                                _webui_timer_start( & timer_3);
                                 for (;;) {
 
                                     // Stop if window is re-connected
@@ -6988,8 +6988,8 @@ static WEBUI_THREAD_SERVER_START {
                                         break;
 
                                     // Stop if timer is finished
-                                    //if (_webui_timer_is_end( & timer_3, 1000))
-                                    //    break;
+                                    if (_webui_timer_is_end( & timer_3, 1000))
+                                        break;
                                 }
                             } while(win->file_handled && !_webui_mtx_is_connected(win, WEBUI_MUTEX_NONE));
 
