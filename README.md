@@ -16,10 +16,11 @@ Additionally, by injecting webui's javascript websocket server into the DOM, a n
 ## Optional environment setup for embedding assets
 * Install msys2 (https://www.msys2.org/)
 * Current installer: https://github.com/msys2/msys2-installer/releases/download/2024-05-07/msys2-x86_64-20240507.exe
-* Launch msys2 urct64 
+* Launch ``msys2`` terminal
  >ie using the default path: ``C:\msys64\ucrt64.exe``
 * In the msys2 terminal, run the following command to install binutils: 
  >pacman -S binutils
+ * Exit the terminal
  
 # Build
 
