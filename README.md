@@ -1,8 +1,12 @@
 # simple-app
 Simple App is reclaiming complex web-style interfaces for low level programmers.
-Build a sophisticated UI using web technologies including html, css, javascript, then launch it inside a native C++ application with no internet connection or external dependencies required.
+
+Leverage a sophisticated UI using web technologies including html, css, javascript, then run it inside a native C++ application with no internet connection or external dependencies required.
+
 This is accomplished by filling the Window with a Microsoft WebView2 (or similar) component, and navigating the View to a local 'index.html' which is retrieved through an embedded civetweb C web and websocket server.
+
 Optionally, by injecting uiweb's javascript websocket server into 'index.html' a new layer of application interactions becomes available that could not exist on a website.
+
 
 # Setup
 
@@ -12,11 +16,11 @@ Optionally, by injecting uiweb's javascript websocket server into 'index.html' a
 ### Optional environment setup for embedding assets
 * Install msys2 (https://www.msys2.org/)
 * Current installer:
->https://github.com/msys2/msys2-installer/releases/download/2024-05-07/msys2-x86_64-20240507.exe
+ >https://github.com/msys2/msys2-installer/releases/download/2024-05-07/msys2-x86_64-20240507.exe
 * Launch msys2 urct64 
->ie using the default path: ```C:\msys64\ucrt64.exe```
+ >ie using the default path: ```C:\msys64\ucrt64.exe```
 * In the msys2 terminal, run the following command to install binutils: 
->```pacman -S binutils```
+ >```pacman -S binutils```
 
 ## Building simple-app *without* embedded assets
 * Clone the repository
@@ -33,11 +37,11 @@ Optionally, by injecting uiweb's javascript websocket server into 'index.html' a
 * Open the Visual Studio solution (scripts/simple-app.sln)
 * Build the c-embed project
 * Run c-embed.exe with your Interface directory as a parameter
->```c-embed.exe "C:\website"```
+ >```c-embed.exe "C:\website"```
 * Open the Project Properties for simple-app
 * Navigate to C/C++ -> Preprocessor
 * Within 'Preprocessor Definitions' update EMBEDDED_ROOT_DIR with your Interface directory
->ie ```EMBEDDED_ROOT_DIR="C:\website"```
+ >ie ```EMBEDDED_ROOT_DIR="C:\website"```
 * Build the simple-app project
 * Run simple-app.exe (no need for external assets!)
 
@@ -52,14 +56,23 @@ Optionally, by injecting uiweb's javascript websocket server into 'index.html' a
 
 ## Notes
 This app is based on the Microsoft Visual Studio C++ template.
+
 Updated to a flashy demo GUI by @JadeZaher (https://github.com/JadeZaher/NathanCDudeHelp)
+
 Updated with webui C++ wrapper and a busy loop invoking a javascript function to interact with the site.
+
 Updated with c-embed to package interface assets directly into the application
+
 Using civetweb (via webui), we can run an entire website from a local directory (or more elaborate backend features with effort).
+
 Updated with a Webview (https://github.com/webview/webview) front end component. This may get removed or replaced.
+
 Updated with a Microsoft Webview2 (https://developer.microsoft.com/en-us/microsoft-edge/webview2) which is wrapped by Webview on Windows, but can also be used directly.
+
 Updated with more web gui visuals
+
 Note that Webview2 is not required for redistributing on most Win10+ systems
+
 Note that one expectation for this project is to make this work cross-platform via gcc+gtk
 
 
