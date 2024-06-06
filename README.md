@@ -53,7 +53,7 @@ Optionally, by injecting uiweb's javascript websocket server into 'index.html' a
 
 ## Running simple-app
 > [!WARNING]
-> Make sure index.html includes "webui.js" for proper functionality
+> Make sure all '.html' files include 'webui.js' for proper functionality
 > <script src="webui.js"></script>
 * If the assets have been embedded, simple-app.exe is portable and stand-alone
 * If the assets are not embedded, a file named index.html must be in the same directory as simple-app.exe
