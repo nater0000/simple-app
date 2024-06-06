@@ -1,8 +1,8 @@
 # simple-app
-Simple App is reclaiming complex web interfaces for low level programmers.
-Build a sophisticated UI using web technologies including html, css, javascript, then launch it inside a simple C++ application with no internet connection or external dependencies required in a re-distributable 1 megabyte exe (not including the size of the UI files).
-This is accomplished by filling the Window with a Microsoft WebView2 win32 component, and navigating the view to a local 'index.html' which is retrieved through an embedded civetweb C web and websocket server.
-Optionally, by injecting uiweb's javascript websocket server into 'index.html' a new layer of application interactions become available that could not exist on a website.
+Simple App is reclaiming complex web-style interfaces for low level programmers.
+Build a sophisticated UI using web technologies including html, css, javascript, then launch it inside a native C++ application with no internet connection or external dependencies required.
+This is accomplished by filling the Window with a Microsoft WebView2 (or similar) component, and navigating the View to a local 'index.html' which is retrieved through an embedded civetweb C web and websocket server.
+Optionally, by injecting uiweb's javascript websocket server into 'index.html' a new layer of application interactions becomes available that could not exist on a website.
 
 ## Dev environment setup
 * Install Microsoft Visual Studio
@@ -38,6 +38,11 @@ Optionally, by injecting uiweb's javascript websocket server into 'index.html' a
 * Build the simple-app project
 * Run simple-app.exe (no need for external assets!)
 
+## Running simple-app
+* Make sure index.html includes "webui.js" for proper functionality
+* If the assets have been embedded, simple-app.exe is portable and stand-alone
+* If the assets are not embedded, a file named index.html must be in the same directory as simple-app.exe
+
 ### Notes
 This app is based on the Microsoft Visual Studio C++ template.
 Updated to a flashy demo GUI by @JadeZaher (https://github.com/JadeZaher/NathanCDudeHelp)
@@ -53,6 +58,8 @@ Note that one expectation for this project is to make this work cross-platform v
 
 ### TODO
 - [ ] Fork c-embed
+- [ ] Refactor msys2-ucrt invocations to use a Preprocessor Definition
+- [ ] Update README with instructions for non-default msys2 installation location
 - [x] Integrate webui build into project
 - [x] Fix current build issues due to external dependencies
 - [ ] [Feature] Add 'Press any key': C++ input handler
