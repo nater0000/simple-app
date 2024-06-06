@@ -36,7 +36,7 @@ Additionally, by injecting webui's javascript websocket server into the DOM, a n
  >ie ```EMBEDDED_ROOT_DIR="C:\website"```
 
 > [!CAUTION]
-> The c-embed.exe parameter and `EMBEDDED_ROOT_DIR`` are *case-sensitive* and *must* match
+> The c-embed.exe parameter and `EMBEDDED_ROOT_DIR` are *case-sensitive* and *must* match
 * Build the simple-app project
 * Run simple-app.exe
 > [!NOTE]
