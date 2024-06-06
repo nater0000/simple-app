@@ -34,6 +34,7 @@ Additionally, by injecting webui's javascript websocket server into the DOM, a n
 * Navigate to C/C++ -> Preprocessor
 * Within 'Preprocessor Definitions' update EMBEDDED_ROOT_DIR with your Interface directory
  >ie ```EMBEDDED_ROOT_DIR="C:\website"```
+
 > [!CAUTION]
 > The c-embed.exe parameter and `EMBEDDED_ROOT_DIR`` are *case-sensitive* and *must* match
 * Build the simple-app project
