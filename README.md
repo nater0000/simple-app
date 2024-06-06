@@ -1,11 +1,11 @@
 # simple-app
 Simple App is reclaiming complex web-style interfaces for low level programmers.
 
-Leverage a sophisticated UI using web technologies including html, css, javascript, then run it inside a native C++ application with no internet connection or external dependencies required.
+Leverage a sophisticated UI using web technologies including html, css, javascript, that runs inside a native C++ application with no internet connection or external dependencies required.
 
-This is accomplished by filling the Window with a Microsoft WebView2 (or similar) component, and navigating the View to a local 'index.html' which is retrieved through an embedded civetweb C web and websocket server.
+This is accomplished by filling the Window with a Microsoft WebView2 component, and navigating the View to a local html file which is retrieved through an embedded civetweb C web and websocket server.
 
-Optionally, by injecting uiweb's javascript websocket server into 'index.html' a new layer of application interactions becomes available that could not exist on a website.
+Additionally, by injecting webui's javascript websocket server into the DOM, a new layer of native application interactions becomes available that could not exist on a website.
 
 
 # Setup
