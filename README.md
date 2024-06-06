@@ -13,7 +13,7 @@ Additionally, by injecting webui's javascript websocket server into the DOM, a n
 ## Dev environment setup
 * Install Microsoft Visual Studio (https://visualstudio.microsoft.com/downloads/)
 
-### Optional environment setup for embedding assets
+## Optional environment setup for embedding assets
 * Install msys2 (https://www.msys2.org/)
 * Current installer:
  >https://github.com/msys2/msys2-installer/releases/download/2024-05-07/msys2-x86_64-20240507.exe
@@ -21,18 +21,8 @@ Additionally, by injecting webui's javascript websocket server into the DOM, a n
  >ie using the default path: ```C:\msys64\ucrt64.exe```
 * In the msys2 terminal, run the following command to install binutils: 
  >```pacman -S binutils```
-
-## Building simple-app *without* embedded assets
-* Clone the repository
-* Open the Visual Studio solution (scripts/simple-app.sln)
-* Open the Project Properties for simple-app
-* Navigate to C/C++ -> Preprocessor
-* Within 'Preprocessor Definitions' remove `USE_CEMBED`
-* Build the simple-app project
-* Copy or move the simple-app.exe output file into your Interface directory (ie ```C:\website\```)
-* Run simple-app.exe
-> [!WARNING]
-> index.html must exist in the same directory as simple-app.exe
+ 
+# Build
 
 ## Building simple-app with embedded assets
 * Clone the repository
@@ -48,6 +38,18 @@ Additionally, by injecting webui's javascript websocket server into the DOM, a n
 * Run simple-app.exe
 > [!NOTE]
 > No need for external assets!
+
+## Building simple-app *without* embedded assets
+* Clone the repository
+* Open the Visual Studio solution (scripts/simple-app.sln)
+* Open the Project Properties for simple-app
+* Navigate to C/C++ -> Preprocessor
+* Within 'Preprocessor Definitions' remove `USE_CEMBED`
+* Build the simple-app project
+* Copy or move the simple-app.exe output file into your Interface directory (ie ```C:\website\```)
+* Run simple-app.exe
+> [!WARNING]
+> index.html must exist in the same directory as simple-app.exe
 
 # Run
 
