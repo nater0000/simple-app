@@ -25,31 +25,33 @@ Additionally, by injecting webui's javascript websocket server into the DOM, a n
 # Build
 
 ## Building simple-app with embedded assets
-* Clone the repository
+* Clone this repository
+ >git clone https://github.com/nater0000/simple-app.git
 * Open the Visual Studio solution (scripts/simple-app.sln)
-* Build the c-embed project
+* Build the ``c-embed`` project
 * Run c-embed.exe with your Interface directory as a parameter
- >```c-embed.exe "C:\website"```
-* Open the Project Properties for simple-app
-* Navigate to C/C++ -> Preprocessor
-* Within 'Preprocessor Definitions' update EMBEDDED_ROOT_DIR with your Interface directory
- >ie ```EMBEDDED_ROOT_DIR="C:\website"```
+ >c-embed.exe "C:\website"
+* Open the Project Properties for ``simple-app``
+* Navigate to ``C/C++``->``Preprocessor``
+* Within ``Preprocessor Definitions`` update ``EMBEDDED_ROOT_DIR`` with your Interface directory
+ >ie ``EMBEDDED_ROOT_DIR="C:\website"``
 
 > [!CAUTION]
-> The c-embed.exe parameter and `EMBEDDED_ROOT_DIR` are *case-sensitive* and *must* match
+> The c-embed.exe parameter and ``EMBEDDED_ROOT_DIR`` are *case-sensitive* and *must* match
 * Build the simple-app project
 * Run simple-app.exe
 > [!NOTE]
 > No need for external assets!
 
 ## Building simple-app *without* embedded assets
-* Clone the repository
+* Clone this repository
+ >git clone https://github.com/nater0000/simple-app.git
 * Open the Visual Studio solution (scripts/simple-app.sln)
 * Open the Project Properties for simple-app
-* Navigate to C/C++ -> Preprocessor
-* Within 'Preprocessor Definitions' remove `USE_CEMBED`
+* Navigate to ``C/C++`` -> ``Preprocessor``
+* Within 'Preprocessor Definitions' remove ``USE_CEMBED``
 * Build the simple-app project
-* Copy or move the simple-app.exe output file into your Interface directory (ie ```C:\website\```)
+* Copy or move the simple-app.exe output file into your Interface directory (ie ``C:\website\``)
 * Run simple-app.exe
 > [!WARNING]
 > index.html must exist in the same directory as simple-app.exe
