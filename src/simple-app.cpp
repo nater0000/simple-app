@@ -5,6 +5,9 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#if defined(USE_CEMBED)
+#include "c-embed.h"
+#endif // USE_CEMBED
 #include "framework.h"
 #include "simple-app.h"
 #include "webui.hpp"
@@ -33,6 +36,11 @@ using std::format;
 #define WINDOW_WIDTH_MIN (1020)
 #define WINDOW_HEIGHT_MIN (400)
 
+#if defined(USE_CEMBED)
+#if !defined(EMBEDDED_ROOT_DIR)
+#error "Error: Set Define EMBEDDED_ROOT_DIR"
+#endif // EMBEDDED_ROOT_DIR
+#endif // USE_CEMBED
 
 struct MainParams {
     string name;
@@ -217,6 +225,9 @@ void setupPrintf()
 {
     if (AllocConsole())
     {
+#if defined(CEMBED_TRANSLATE)
+#undef FILE
+#endif // CEMBED_TRANSLATE
         FILE* fi = 0;
         freopen_s(&fi, "CONOUT$", "w", stdout);
     }
@@ -309,7 +320,9 @@ int invokeUiMain(_In_ LPWSTR    lpCmdLine,
     _In_ int       nCmdShow) {
 
     // To automatically redirect cout to file 'console.log' uncomment this:
-    //setupCout();
+#if defined(_DEBUG)
+    setupCout();
+#endif // _DEBUG
 
     // To create a Console window for printf uncomment this:
     //setupPrintf();
@@ -329,9 +342,16 @@ int invokeUiMain(_In_ LPWSTR    lpCmdLine,
     webserver.bind("JsBtnDouble", handleIndex);
     webserver.bind("JsBtnNext", handleNextPage);
 
-    webserver.set_root_folder(GetAppDir());
-    //@TODO: Write the embedded files to disk {"index.html", "404.html", ..}
-
+    // Note: When using c-embed, this needs to match the directory provided
+    string root_dir;
+#if defined(USE_CEMBED)
+    root_dir = EMBEDDED_ROOT_DIR;
+    webserver.set_root_folder(root_dir);
+    root_dir = "*virtual*";
+#else // USE_CEMBED
+    root_dir = GetAppDir();
+    webserver.set_root_folder(root_dir);
+#endif // USE_CEMBED
 
     // show_browser will initialize the webserver and
     //  facilitate javascript bindings with the server
@@ -361,7 +381,7 @@ int invokeUiMain(_In_ LPWSTR    lpCmdLine,
     wnd.init(hWnd);
 
     // Sets the title of the win32 Window
-    wnd.set_title(_gParams.name + "'s App ~[" + url.str() + " ][ " + GetAppDir() + " ]~");
+    wnd.set_title(_gParams.name + "'s App ~[" + url.str() + " ][ " + root_dir + " ]~");
 
     // @FIX: window position
     //wnd.set_position(horizontal, vertical);

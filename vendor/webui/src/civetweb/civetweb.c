@@ -1946,7 +1946,7 @@ enum {
 #if defined(__linux__)
 	ALLOW_SENDFILE_CALL,
 #endif
-#if defined(_WIN32)
+#if defined(_WIN32) // && !defined(USE_CEMBED)
 	CASE_SENSITIVE_FILES,
 #endif
 	THROTTLE,
@@ -2975,7 +2975,7 @@ mg_fopen(const struct mg_connection *conn,
 		return 0;
 	}
 
-#if defined(_WIN32)
+#if defined(_WIN32) && !defined(USE_CEMBED)
 	{
 		wchar_t wbuf[UTF16_PATH_MAX];
 		path_to_unicode(conn, path, wbuf, ARRAY_SIZE(wbuf));
@@ -2995,13 +2995,13 @@ mg_fopen(const struct mg_connection *conn,
 	/* Linux et al already use unicode. No need to convert. */
 	switch (mode) {
 	case MG_FOPEN_MODE_READ:
-		filep->access.fp = fopen(path, "r");
+		filep->access.fp = fopen(path, "rb");
 		break;
 	case MG_FOPEN_MODE_WRITE:
-		filep->access.fp = fopen(path, "w");
+		filep->access.fp = fopen(path, "wb");
 		break;
 	case MG_FOPEN_MODE_APPEND:
-		filep->access.fp = fopen(path, "a");
+		filep->access.fp = fopen(path, "ab");
 		break;
 	}
 
@@ -5116,6 +5116,7 @@ path_to_unicode(const struct mg_connection *conn,
 
 #if !defined(NO_FILESYSTEMS)
 /* Get file information, return 1 if file exists, 0 if not */
+#if !defined(USE_CEMBED)
 static int
 mg_stat(const struct mg_connection *conn,
         const char *path,
@@ -5163,7 +5164,39 @@ mg_stat(const struct mg_connection *conn,
 
 	return 0;
 }
-#endif
+#else // USE_CEMBED
+static int S_ISDIR(unsigned short mode)
+{
+	return (mode & S_IFDIR) ? 1 : 0;
+}
+// Note: this is currently copy/pasted from !defined(_WIN32)
+// @TODO: Refactor this to be shared
+static int
+mg_stat(const struct mg_connection* conn,
+	const char* path,
+	struct mg_file_stat* filep)
+{
+	struct stat st;
+	if (!filep) {
+		return 0;
+	}
+	memset(filep, 0, sizeof(*filep));
+
+	if (mg_path_suspicious(conn, path)) {
+		return 0;
+	}
+
+	if (0 == estat(path, &st)) {
+		filep->size = (uint64_t)(st.st_size);
+		filep->last_modified = st.st_mtime;
+		filep->is_directory = S_ISDIR(st.st_mode);
+		return 1;
+	}
+
+	return 0;
+}
+#endif // USE_CEMBED
+#endif // NO_FILESYSTEMS
 
 
 static int

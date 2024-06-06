@@ -30,6 +30,12 @@
 // -- Includes ------------------------
 #include "../bridge/webui_bridge.h" // WebUI Bridge (JavaScript)
 #include "webui.h"                  // WebUI Header
+//#include "c-embed.h"
+typedef struct EFILE_S EFILE;
+int estat(const char* file, struct stat* const s);
+EFILE* eopen(const char* file, const char* mode);
+void eclose(EFILE* e);
+
 
 // -- Defines -------------------------
 #define WEBUI_SIGNATURE      0xDD    // All packets should start with this 8bit
@@ -2889,11 +2895,11 @@ static bool _webui_file_exist(char* path) {
         return false;
 
     // Parse home environments in the path
-    #ifdef _WIN32
+#if defined(_WIN32)
     // Windows
     char full_path[WEBUI_MAX_PATH];
     ExpandEnvironmentStringsA(path, full_path, sizeof(full_path));
-    #else
+#else
     // Linux & macOS
     char full_path[WEBUI_MAX_PATH];
     if (path[0] == '~') {
@@ -2914,7 +2920,15 @@ static bool _webui_file_exist(char* path) {
     printf("[Core]\t\t_webui_file_exist() -> Parsed to [%s]\n", full_path);
     #endif
 
-    #if defined(_WIN32)
+#if defined(_WIN32)
+#if defined(USE_CEMBED)
+    EFILE* f = eopen(full_path, "r");
+    if (f) {
+        eclose(f);
+        return true;
+    }
+    return false;
+#else
     // Convert UTF-8 to wide string on Windows
     int wlen = MultiByteToWideChar(CP_UTF8, 0, full_path, -1, NULL, 0);
     wchar_t * wfilePath = (wchar_t * ) _webui_malloc(wlen * sizeof(wchar_t));
@@ -2924,10 +2938,11 @@ static bool _webui_file_exist(char* path) {
     DWORD dwAttrib = GetFileAttributesW(wfilePath);
     _webui_free_mem((void * ) wfilePath);
     return (dwAttrib != INVALID_FILE_ATTRIBUTES && !(dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
-    #else
+#endif // USE_CEMBED
+#else
     // Linux / macOS
     return (WEBUI_FILE_EXIST(full_path, 0) == 0);
-    #endif
+#endif
 }
 
 static const char* _webui_get_extension(const char* f) {
@@ -3076,14 +3091,14 @@ static char* _webui_get_full_path_from_url(_webui_window_t * win, const char* ur
     char* full_path = (char*)_webui_malloc(_webui_strlen(win->server_root_path) + 1 + _webui_strlen(file));
     sprintf(full_path, "%s%s%s", win->server_root_path, webui_sep, file);
 
-    #ifdef _WIN32
+#if defined(_WIN32)
     // Replace `/` by `\`
     for (int i = 0; full_path[i] != '\0'; i++) {
         if (full_path[i] == '/') {
             full_path[i] = * webui_sep;
         }
     }
-    #endif
+#endif
 
     // Clean
     _webui_free_mem((void * ) file);
@@ -3868,16 +3883,20 @@ static bool _webui_folder_exist(char* folder) {
     printf("[Core]\t\t_webui_folder_exist([%s])...\n", folder);
     #endif
 
-    #if defined(_MSC_VER)
+#if defined(USE_CEMBED)
+    // @TODO: Add directory names to cembed map
+    return true;
+
+#elif defined(_MSC_VER)
     if (GetFileAttributesA(folder) != INVALID_FILE_ATTRIBUTES)
         return true;
-    #else
+#else
     DIR * dir = opendir(folder);
     if (dir) {
         closedir(dir);
         return true;
     }
-    #endif
+#endif
 
     return false;
 }
