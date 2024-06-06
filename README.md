@@ -11,9 +11,9 @@ Optionally, by injecting uiweb's javascript websocket server into 'index.html' a
 * Install msys2 (https://www.msys2.org/)
 * Current installer: https://github.com/msys2/msys2-installer/releases/download/2024-05-07/msys2-x86_64-20240507.exe
 * Launch msys2 urct64 
-** ie using the default path:```C:\msys64\ucrt64.exe```
+ie using the default path:```C:\msys64\ucrt64.exe```
 * In the msys2 terminal, run the following command to install binutils: 
-** >```pacman -S binutils```
+>```pacman -S binutils```
 
 ## Building simple-app *without* embedded assets
 * Clone the repository
@@ -30,11 +30,11 @@ Optionally, by injecting uiweb's javascript websocket server into 'index.html' a
 * Open the Visual Studio solution (scripts/simple-app.sln)
 * Build the c-embed project
 * Run c-embed.exe with your Interface directory as a parameter
-** >```c-embed.exe "C:\website"```
+>```c-embed.exe "C:\website"```
 * Open the Project Properties for simple-app
 * Navigate to C/C++ -> Preprocessor
 * Within 'Preprocessor Definitions' update EMBEDDED_ROOT_DIR with your Interface directory
-** ie ```EMBEDDED_ROOT_DIR="C:\website"```
+ie ```EMBEDDED_ROOT_DIR="C:\website"```
 * Build the simple-app project
 * Run simple-app.exe (no need for external assets!)
 
