@@ -1,4 +1,4 @@
-# simple-app
+# Introduction
 Simple App is reclaiming complex web-style interfaces for native application development!
 
 Leverage a sophisticated UI using web technologies including html, css, javascript, that runs inside a native C++ application with no internet connection or external dependencies required.
