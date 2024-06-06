@@ -30,7 +30,9 @@ Optionally, by injecting uiweb's javascript websocket server into 'index.html' a
 * Within 'Preprocessor Definitions' remove `USE_CEMBED`
 * Build the simple-app project
 * Copy or move the simple-app.exe output file into your Interface directory (ie ```C:\website\```)
-* Run simple-app.exe (note that index.html must exist in the same directory as simple-app.exe)
+* Run simple-app.exe
+> [!WARNING]
+> index.html must exist in the same directory as simple-app.exe
 
 ## Building simple-app with embedded assets
 * Clone the repository
@@ -43,12 +45,16 @@ Optionally, by injecting uiweb's javascript websocket server into 'index.html' a
 * Within 'Preprocessor Definitions' update EMBEDDED_ROOT_DIR with your Interface directory
  >ie ```EMBEDDED_ROOT_DIR="C:\website"```
 * Build the simple-app project
-* Run simple-app.exe (no need for external assets!)
+* Run simple-app.exe
+> [!NOTE]
+> No need for external assets!
 
 # Run
 
 ## Running simple-app
-* Make sure index.html includes "webui.js" for proper functionality
+> [!WARNING]
+> Make sure index.html includes "webui.js" for proper functionality
+> <script src="webui.js"></script>
 * If the assets have been embedded, simple-app.exe is portable and stand-alone
 * If the assets are not embedded, a file named index.html must be in the same directory as simple-app.exe
 
