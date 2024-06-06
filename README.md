@@ -44,7 +44,7 @@ Optionally, by injecting uiweb's javascript websocket server into 'index.html' a
 * If the assets have been embedded, simple-app.exe is portable and stand-alone
 * If the assets are not embedded, a file named index.html must be in the same directory as simple-app.exe
 
-### Notes
+## Notes
 This app is based on the Microsoft Visual Studio C++ template.
 Updated to a flashy demo GUI by @JadeZaher (https://github.com/JadeZaher/NathanCDudeHelp)
 Updated with webui C++ wrapper and a busy loop invoking a javascript function to interact with the site.
@@ -57,7 +57,7 @@ Note that Webview2 is not required for redistributing on most Win10+ systems
 Note that one expectation for this project is to make this work cross-platform via gcc+gtk
 
 
-### TODO
+## TODO
 - [ ] Fork c-embed
 - [ ] Refactor msys2-ucrt invocations to use a Preprocessor Definition
 - [ ] Update README with instructions for non-default msys2 installation location
