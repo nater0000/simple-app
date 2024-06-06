@@ -4,8 +4,10 @@ Build a sophisticated UI using web technologies including html, css, javascript,
 This is accomplished by filling the Window with a Microsoft WebView2 (or similar) component, and navigating the View to a local 'index.html' which is retrieved through an embedded civetweb C web and websocket server.
 Optionally, by injecting uiweb's javascript websocket server into 'index.html' a new layer of application interactions becomes available that could not exist on a website.
 
+# Setup
+
 ## Dev environment setup
-* Install Microsoft Visual Studio
+* Install Microsoft Visual Studio (https://visualstudio.microsoft.com/downloads/)
 
 ### Optional environment setup for embedding assets
 * Install msys2 (https://www.msys2.org/)
@@ -39,10 +41,14 @@ Optionally, by injecting uiweb's javascript websocket server into 'index.html' a
 * Build the simple-app project
 * Run simple-app.exe (no need for external assets!)
 
+# Run
+
 ## Running simple-app
 * Make sure index.html includes "webui.js" for proper functionality
 * If the assets have been embedded, simple-app.exe is portable and stand-alone
 * If the assets are not embedded, a file named index.html must be in the same directory as simple-app.exe
+
+# About
 
 ## Notes
 This app is based on the Microsoft Visual Studio C++ template.
