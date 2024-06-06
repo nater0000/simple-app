@@ -62,7 +62,7 @@ Additionally, by injecting webui's javascript websocket server into the DOM, a n
 * A file named ``index.html`` must be in the Interface directory
 > [!WARNING]
 > Make sure all ``.html`` files include ``webui.js`` for proper functionality
-> <script src="webui.js"></script>
+> <script src="webui.js"/>
 * If the assets have been embedded, ``simple-app.exe`` is portable and stand-alone
 * If the assets are not embedded, a file named ``index.html`` must be in the same directory as ``simple-app.exe``
 
