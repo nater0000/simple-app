@@ -88,7 +88,7 @@ Additionally, by injecting webui's javascript websocket server into the WebView,
 
 </div>
 
-## Notes
+### Notes
 This app is based on the Microsoft Visual Studio C++ template.
 
 Updated to a flashy demo GUI by @JadeZaher (https://github.com/JadeZaher/NathanCDudeHelp)
@@ -116,15 +116,19 @@ Note that one expectation for this project is to make this work cross-platform v
 
 ## TODO
 - [ ] Modify c-embed to ignore the path prefix (ie "C:\my-files\")
+- [ ] Update webui to use version 2.5
 - [ ] Fix window initialization code to be closer to the original template
+- [ ] Refactor initialization into an interface
+- [ ] Refactor Windows Resource into platform-specific feature
+- [ ] Integrate with forked version of webui
+- [ ] Integrate with forked version of civetweb
+- [ ] Integrate with forked version of c-embed
+- [ ] [Feature] Add 'Press any key': C++ input handler
+- [ ] [Feature] Add 'Press any key': next.html
 - [ ] Refactor msys2-ucrt invocations to use a Preprocessor Definition
 - [ ] Update README with instructions for non-default msys2 installation location
 - [x] Integrate webui build into project
 - [x] Fix current build issues due to external dependencies
-- [ ] [Feature] Add 'Press any key': C++ input handler
-- [ ] [Feature] Add 'Press any key': next.html
-- [ ] Refactor initialization into an interface
-- [ ] Create a new repo for MSI packager
 - [x] Impl write index (+subdir) to appdata [bin2cpp] [using c-embed instead]
 - [x] Compile index (+subdir) into binary [bin2cpp] [using c-embed instead]
 - [x] Make a prettier gui
@@ -135,34 +139,38 @@ Note that one expectation for this project is to make this work cross-platform v
 - [x] Modify webui build scripts
 - [x] Refactor .sln,.vcproj into ./scripts/
 - [x] Refactor ./src/website/* into ./website/*
-- [ ] Refactor Windows Resource into platform-specific feature
-- [ ] Add cmake for basic project compilation
+
+
+### Possible ports
 - [ ] Add gcc implementation
 - [ ] Add Windows Resource feature usage into gcc implementation
-- [ ] Integrate with forked version of webui
-- [ ] Integrate with forked version of civetweb
-- [ ] Integrate with forked version of c-embed
 
 
-### Possible improvements
-- [ ] In post-build steps, xcopy "$(SolutionDir)..\website\" "$(TargetDir)website\" /y
-- [ ] Add gradle or similar
+### Possible additions
+- [ ] Build civetweb with Duktape support
+- [ ] Integrate a database
+- [ ] Add pre-build steps to invoke c-embed
+- [ ] Add gradle or cmake or similar
+- [ ] Create a new project for MSI packaging
 
 
 ### Fork webui
-- [ ] Raise webui PR with additional APIs
+- [ ] Raise PR with additional APIs
 - [ ] Raise PR with msvc fixes
 - [ ] Raise PR with c-embed support
 - [ ] Raise PR with renamed 'window'
 - [x] Refactor civetweb into ./vendor
 - [x] Refactor .html and ./src/.html into ./website/
 - [x] Refactor .sln,.vcproj into ./scripts/
+- [x] Support Microsoft Visual Studio (MSVC)
 
 ### Fork civetweb
 - [ ] Raise PR with msvc fixes
 - [ ] Raise PR with c-embed support
+- [x] Support Microsoft Visual Studio (MSVC)
 
 ### Forked c-embed
+- [ ] Raise PR with msvc fixes
 - [x] Support Microsoft Visual Studio (MSVC)
 
 
