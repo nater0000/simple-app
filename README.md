@@ -164,3 +164,6 @@ Note that one expectation for this project is to make this work cross-platform v
 
 ### Forked c-embed
 - [x] Support Microsoft Visual Studio (MSVC)
+
+
+[![Stargazers repo roster for @nater0000/simple-app](https://reporoster.com/stars/nater0000/simple-app)](https://github.com/nater0000/simple-app/stargazers)
