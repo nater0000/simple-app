@@ -1,6 +1,6 @@
 <div align="center">
 
-# Simple-App v0.3
+# Simple-App
 
 </div>
 
