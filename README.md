@@ -2,6 +2,8 @@
 
 # Simple-App v0.3
 
+</div>
+
 Simple App is bringing complex web-style interfaces to native application development!
 
 Leverage a UI that uses web technologies (html, css, javascript, or even svelte's adapter-static) to drive native C++ applications with no internet connection or external dependencies.
@@ -10,7 +12,6 @@ This is accomplished by filling the native UI Window with a Microsoft WebView2 c
 
 Additionally, by injecting webui's javascript websocket server into the WebView, a new layer of local application interactions becomes available that cannot exist on a typical website.
 
-</div>
 
 <div align="center">
 
