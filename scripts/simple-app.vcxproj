@@ -77,6 +77,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)..\build\out\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\build\obj\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <TargetName>$(ProjectName)_d</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -110,9 +111,9 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;WEBUI_LOG;CEMBED_TRANSLATE;N_USE_CEMBED;EMBEDDED_ROOT_DIR="C:\\website";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;WEBUI_LOG;NO_CEMBED_TRANSLATE;NO_USE_CEMBED;EMBEDDED_ROOT_DIR="C:\\website";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\vendor\webui\src;..\vendor\webui\src\include;..\src\;..\vendor\webview;..\vendor\webview2\build\native\include;..\vendor\c-embed;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\vendor\webui\src;..\vendor\webui\src\include;..\src\;..\vendor\webview;..\vendor\webview2\build\native\include;..\vendor\c-embed;..\vendor\dirent\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -136,11 +137,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;NO_WEBUI_LOG;CEMBED_TRANSLATE;N_USE_CEMBED;EMBEDDED_ROOT_DIR="C:\\website";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;NO_WEBUI_LOG;CEMBED_TRANSLATE;USE_CEMBED;EMBEDDED_ROOT_DIR="C:\\magi-tattoos";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\vendor\webui\src;..\vendor\webui\src\include;..\src\;..\vendor\webview;..\vendor\webview2\build\native\include;..\vendor\c-embed;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\vendor\webui\src;..\vendor\webui\src\include;..\src\;..\vendor\webview;..\vendor\webview2\build\native\include;..\vendor\c-embed;..\vendor\dirent\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <Optimization>MinSpace</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -164,6 +166,8 @@
     <ClInclude Include="..\src\simple-app.h" />
     <ClInclude Include="..\src\targetver.h" />
     <ClInclude Include="..\src\win32_window.h" />
+    <ClInclude Include="..\vendor\c-embed\c-embed.h" />
+    <ClInclude Include="..\vendor\webui\src\civetweb\civetweb.h" />
     <ClInclude Include="..\vendor\webui\src\include\webui.h" />
     <ClInclude Include="..\vendor\webui\src\include\webui.hpp" />
   </ItemGroup>
@@ -179,6 +183,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\vendor\c-embed\c-embed-impl.c" />
     <ClCompile Include="..\vendor\webui\src\civetweb\civetweb.c">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NO_SSL;NO_CACHING;NO_CGI;USE_WEBSOCKET;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NO_SSL;NO_CACHING;NO_CGI;USE_WEBSOCKET;%(PreprocessorDefinitions)</PreprocessorDefinitions>

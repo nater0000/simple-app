@@ -30,12 +30,10 @@
 // -- Includes ------------------------
 #include "../bridge/webui_bridge.h" // WebUI Bridge (JavaScript)
 #include "webui.h"                  // WebUI Header
-//#include "c-embed.h"
-typedef struct EFILE_S EFILE;
-int estat(const char* file, struct stat* const s);
-EFILE* eopen(const char* file, const char* mode);
-void eclose(EFILE* e);
 
+#if defined(USE_CEMBED)
+#include "c-embed.h"
+#endif // USE_CEMBED
 
 // -- Defines -------------------------
 #define WEBUI_SIGNATURE      0xDD    // All packets should start with this 8bit
@@ -3163,13 +3161,25 @@ static int _webui_serve_file(_webui_window_t * win, struct mg_connection * conn)
         // Using internal files handler
 
         // Get full path
-        char* full_path = _webui_get_full_path_from_url(win, url);
+        char* full_path = NULL;
+        if ('/' == url[strlen(url)-1]) {
+            // concat index.html and try again
+            const char* index_filename = "index.html";
+            char* index_path = (char*)_webui_malloc(_webui_strlen(url) + 1 + _webui_strlen(index_filename));
+            sprintf(index_path, "%s%s", url, index_filename);
+            full_path = _webui_get_full_path_from_url(win, index_path);
+            _webui_free_mem((void*)index_path);
+
+        } else {
+            full_path = _webui_get_full_path_from_url(win, url);
+        }
 
         if (_webui_file_exist(full_path)) {
 
             // 200 - File exist
             mg_send_file(conn, full_path);
             http_status_code = 200;
+
         } else {
 
             // 404 - File not exist

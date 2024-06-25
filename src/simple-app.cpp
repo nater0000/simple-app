@@ -5,15 +5,18 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#if defined(USE_CEMBED)
-#include "c-embed.h"
-#endif // USE_CEMBED
 #include "framework.h"
 #include "simple-app.h"
 #include "webui.hpp"
 #include <chrono>
 #include <format>
 #include "win32_window.h"
+#if defined(USE_BEENUM)
+#include "BeeNum/Math.h"
+#endif // USE_BEENUM
+#if defined(USE_CEMBED)
+#include "c-embed.h"
+#endif // USE_CEMBED
 
 using std::string;
 using std::string_view;
@@ -33,8 +36,8 @@ using std::format;
 
 #define WINDOW_WIDTH_DEFAULT (720)
 #define WINDOW_HEIGHT_DEFAULT (640)
-#define WINDOW_WIDTH_MIN (1020)
-#define WINDOW_HEIGHT_MIN (400)
+#define WINDOW_WIDTH_MIN (1024)
+#define WINDOW_HEIGHT_MIN (360)
 
 #if defined(USE_CEMBED)
 #if !defined(EMBEDDED_ROOT_DIR)
@@ -50,7 +53,7 @@ struct MainParams {
 MainParams _gParams;
 
 
-void handleRefresh(webui::window::event* e) {
+void handleClick(webui::window::event* e) {
 
     // JavaScript:
     // webui.call('MyID_One', 'Hello');
@@ -59,8 +62,7 @@ void handleRefresh(webui::window::event* e) {
     //std::string str_2 = e->get_string(1);
     string str_2 = _gParams.name;
 
-    cout << "my_function_string 1: " << str_1 << endl; // Hello
-    cout << "my_function_string 2: " << str_2 << endl; // World
+    cout << "handleClick: " << str_1 << str_2 << endl; // Hello
 }
 
 string getUserName()
@@ -146,29 +148,82 @@ string strip_trailing(string s, string trail) {
     return string(s, 0, strLen - eraseLen);
 }
 
-void handleIndex(webui::window::event* e) {
+void handleCalc(webui::window::event* e) {
 
-    // JavaScript:
-    // webui.call('MyID_Four', number, 2).then(...)
+    // From JavaScript:
+    // webui.call('JsBtnCalc', num2, op, num2).then(...)
 
     size_t tailLen = 0;
-    string numberMs = e->get_string(0);
-    long long times = e->get_int(1);
+    string a = e->get_string(0);
+    //long long op = e->get_int(1);
+    string op = e->get_string(1);
+    string b = e->get_string(2);
 
-    char* end = (char*)(numberMs.c_str() + numberMs.length());
-    long long number = strtoll(numberMs.c_str(), &end, 10);
-    long long res = number * times;
+    const char* begin = a.c_str();
+    char* end = (char*)(a.c_str() + a.length());
+    long long number = strtoll(begin, &end, 10);
+#if defined(USE_BEENUM)
+    BeeNum::Bint intA(a);
+    BeeNum::Bint intB(b);
+    BeeNum::Bint res(-1);
+#else
+    unsigned long long intA = 0;
+    unsigned long long intB = 0;
+    unsigned long long res = -1;
+#endif // USE_BEENUM
 
-    cout << "handleIndex: " << number << " * " << times << " = " << res << endl;
+    string opStr = "?";
+    if (0 == op.compare("add")) {
+        opStr = "+";
+        res = intA + intB;
+    }
+    else if (0 == op.compare("subtract")) {
+        opStr = "-";
+        res = intA - intB;
+    }
+    else if (0 == op.compare("multiply")) {
+        opStr = "x";
+        res = intA * intB;
+    }
+    else if (0 == op.compare("divide")) {
+        opStr = "÷";
+        if (intB == 0) {
+            // Avoid divide by zero
+            res = 0;
+        }
+        else {
+            res = intA / intB;
+        }
+    }
+
+#if defined(USE_BEENUM)
+    string resultStr = res.toString();
+#else
+    string resultStr = std::to_string(res);
+#endif // USE_BEENUM
+    cout << "handleCalc: " << a << " " << opStr << " " << b << " = " << resultStr << endl;
 
     // Send back the response to JavaScript
-    e->return_int(res);
+    e->return_string(resultStr);
 }
 
 void handleNextPage(webui::window::event* e)
 {
+    // From JavaScript:
+    // webui.call('JsBtnNext', "next_page.html")
+    
     webui_run(e->window, "window.location.href='page2.html';");
     //webui_navigate(e->window, "page2.html");
+}
+
+void handleExit(webui::window::event* e)
+{
+    // From JavaScript:
+    // webui.call('JsBtnExit')
+
+    webui::exit();
+    PostQuitMessage(0);
+    exit(1);
 }
 
 void handleWebEvents(webui::window::event* e)
@@ -319,13 +374,13 @@ HWND CreateScreen(win32_window* w)
 int invokeUiMain(_In_ LPWSTR    lpCmdLine,
     _In_ int       nCmdShow) {
 
-    // To automatically redirect cout to file 'console.log' uncomment this:
 #if defined(_DEBUG)
+    // Redirect cout to file 'console.log'
     setupCout();
-#endif // _DEBUG
 
-    // To create a Console window for printf uncomment this:
-    //setupPrintf();
+    // Creates a Console window for printf
+    setupPrintf();
+#endif // _DEBUG
 
     cout << "<<<<<<<< test cout   <<<<<<<<" << endl;
     printf( ">>>>>>>> test printf >>>>>>>>\n" );
@@ -337,10 +392,10 @@ int invokeUiMain(_In_ LPWSTR    lpCmdLine,
     webui::window webserver{};
     //webui::set_timeout(2);
 
-    webserver.bind("", handleWebEvents);
-    webserver.bind("RefreshButtonHandler", handleRefresh);
-    webserver.bind("JsBtnDouble", handleIndex);
+    webserver.bind("JsBtnCalc", handleCalc);
     webserver.bind("JsBtnNext", handleNextPage);
+    webserver.bind("JsBtnExit", handleExit);
+    //webserver.bind("", handleWebEvents);
 
     // Note: When using c-embed, this needs to match the directory provided
     string root_dir;
@@ -381,7 +436,7 @@ int invokeUiMain(_In_ LPWSTR    lpCmdLine,
     wnd.init(hWnd);
 
     // Sets the title of the win32 Window
-    wnd.set_title(_gParams.name + "'s App ~[" + url.str() + " ][ " + root_dir + " ]~");
+    wnd.set_title(_gParams.name + "> ~[" + url.str() + " ]~[ " + root_dir + " ]~");
 
     // @FIX: window position
     //wnd.set_position(horizontal, vertical);

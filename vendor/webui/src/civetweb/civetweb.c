@@ -183,6 +183,10 @@ mg_static_assert(sizeof(void *) >= sizeof(int), "data type size check");
 #error "Symbian is no longer maintained. CivetWeb no longer supports Symbian."
 #endif /* __SYMBIAN32__ */
 
+#if defined(USE_CEMBED)
+#include "c-embed.h"
+#endif // USE_CEMBED
+
 #if defined(__ZEPHYR__)
 #include <ctype.h>
 #include <fcntl.h>
