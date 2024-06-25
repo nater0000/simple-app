@@ -1,19 +1,23 @@
-# Introduction
-Simple App is reclaiming complex web-style interfaces for native application development!
+<div align="center">
+# Simple-App v0.3
 
-Leverage a sophisticated UI using web technologies including html, css, javascript, that runs inside a native C++ application with no internet connection or external dependencies required.
+Simple App is bringing complex web-style interfaces to native application development!
 
-This is accomplished by filling the Window with a Microsoft WebView2 component, and navigating the View to a local html file which is retrieved through an embedded civetweb C web and websocket server.
+Leverage a UI that uses web technologies (html, css, javascript, or even svelte's adapter-static) to drive native C++ applications with no internet connection or external dependencies.
 
-Additionally, by injecting webui's javascript websocket server into the DOM, a new layer of native application interactions becomes available that could not exist on a website.
+This is accomplished by filling the native UI Window with a Microsoft WebView2 component, and navigating the WebView to an embedded webserver.
 
+Additionally, by injecting webui's javascript websocket server into the WebView, a new layer of local application interactions becomes available that cannot exist on a typical website.
+</div>
 
+<div align="center">
 # Setup
+</div>
 
-## Dev environment setup
+## Development environment
 * Install Microsoft Visual Studio (https://visualstudio.microsoft.com/downloads/)
 
-## Optional environment setup for embedding assets
+## *Optional* Asset embedding environment
 * Install msys2 (https://www.msys2.org/)
 * Current installer: https://github.com/msys2/msys2-installer/releases/download/2024-05-07/msys2-x86_64-20240507.exe
 * Launch ``msys2`` terminal
@@ -22,7 +26,9 @@ Additionally, by injecting webui's javascript websocket server into the DOM, a n
  >pacman -S binutils
  * Exit the terminal
  
+<div align="center">
 # Build
+</div>
 
 ## Building with embedded assets
 * Clone this repository
@@ -56,17 +62,20 @@ Additionally, by injecting webui's javascript websocket server into the DOM, a n
 > [!WARNING]
 > ``index.html`` must exist in the same directory as ``simple-app.exe``
 
+<div align="center">
 # Run
+</div>
 
 ## Running simple-app
-* A file named ``index.html`` must be in the Interface directory
 > [!WARNING]
 > Make sure all ``.html`` files include ``webui.js`` for proper functionality
-> <script src="webui.js"/>
+> <script src="webui.js"></script>
 * If the assets have been embedded, ``simple-app.exe`` is portable and stand-alone
 * If the assets are not embedded, a file named ``index.html`` must be in the same directory as ``simple-app.exe``
 
-# About
+<div align="center">
+# Additional Information
+</div>
 
 ## Notes
 This app is based on the Microsoft Visual Studio C++ template.
@@ -85,13 +94,18 @@ Updated with a Microsoft Webview2 (https://developer.microsoft.com/en-us/microso
 
 Updated with more web gui visuals
 
+Verified with BeeNum and pure javascript Calculator
+
+Verified with svelte project using adapter-static
+
 Note that Webview2 is not required for redistributing on most Win10+ systems
 
 Note that one expectation for this project is to make this work cross-platform via gcc+gtk
 
 
 ## TODO
-- [ ] Fork c-embed
+- [ ] Modify c-embed to ignore the path prefix (ie "C:\my-files\")
+- [ ] Fix window initialization code to be closer to the original template
 - [ ] Refactor msys2-ucrt invocations to use a Preprocessor Definition
 - [ ] Update README with instructions for non-default msys2 installation location
 - [x] Integrate webui build into project
@@ -114,6 +128,9 @@ Note that one expectation for this project is to make this work cross-platform v
 - [ ] Add cmake for basic project compilation
 - [ ] Add gcc implementation
 - [ ] Add Windows Resource feature usage into gcc implementation
+- [ ] Integrate with forked version of webui
+- [ ] Integrate with forked version of civetweb
+- [ ] Integrate with forked version of c-embed
 
 
 ### Possible improvements
@@ -121,12 +138,18 @@ Note that one expectation for this project is to make this work cross-platform v
 - [ ] Add gradle or similar
 
 
-### Forked webui
-- [ ] Rename 'window'
+### Fork webui
+- [ ] Raise webui PR with additional APIs
+- [ ] Raise PR with msvc fixes
+- [ ] Raise PR with c-embed support
+- [ ] Raise PR with renamed 'window'
 - [x] Refactor civetweb into ./vendor
 - [x] Refactor .html and ./src/.html into ./website/
 - [x] Refactor .sln,.vcproj into ./scripts/
 
+### Fork civetweb
+- [ ] Raise PR with msvc fixes
+- [ ] Raise PR with c-embed support
 
 ### Forked c-embed
 - [x] Support Microsoft Visual Studio (MSVC)
