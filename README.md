@@ -3,6 +3,7 @@
 # Simple-App
 
 ### Simple App is bringing complex web-style interfaces to native application development!
+<br>
 
 </div>
 
