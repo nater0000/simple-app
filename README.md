@@ -1,4 +1,5 @@
 <div align="center">
+
 # Simple-App v0.3
 
 Simple App is bringing complex web-style interfaces to native application development!
@@ -8,10 +9,13 @@ Leverage a UI that uses web technologies (html, css, javascript, or even svelte'
 This is accomplished by filling the native UI Window with a Microsoft WebView2 component, and navigating the WebView to an embedded webserver.
 
 Additionally, by injecting webui's javascript websocket server into the WebView, a new layer of local application interactions becomes available that cannot exist on a typical website.
+
 </div>
 
 <div align="center">
+
 # Setup
+
 </div>
 
 ## Development environment
@@ -27,7 +31,9 @@ Additionally, by injecting webui's javascript websocket server into the WebView,
  * Exit the terminal
  
 <div align="center">
+
 # Build
+
 </div>
 
 ## Building with embedded assets
@@ -63,7 +69,9 @@ Additionally, by injecting webui's javascript websocket server into the WebView,
 > ``index.html`` must exist in the same directory as ``simple-app.exe``
 
 <div align="center">
+
 # Run
+
 </div>
 
 ## Running simple-app
@@ -74,7 +82,9 @@ Additionally, by injecting webui's javascript websocket server into the WebView,
 * If the assets are not embedded, a file named ``index.html`` must be in the same directory as ``simple-app.exe``
 
 <div align="center">
+
 # Additional Information
+
 </div>
 
 ## Notes
