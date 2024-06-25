@@ -88,7 +88,7 @@ Additionally, by injecting webui's javascript websocket server into the WebView,
 
 </div>
 
-### Notes
+## Notes
 This app is based on the Microsoft Visual Studio C++ template.
 
 Updated to a flashy demo GUI by @JadeZaher (https://github.com/JadeZaher/NathanCDudeHelp)
