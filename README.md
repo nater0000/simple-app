@@ -2,9 +2,9 @@
 
 # Simple-App
 
-</div>
-
 ### Simple App is bringing complex web-style interfaces to native application development!
+
+</div>
 
 Leverage a UI that uses web technologies (html, css, javascript, or even svelte's adapter-static) to drive native C++ applications with no internet connection or external dependencies.
 
