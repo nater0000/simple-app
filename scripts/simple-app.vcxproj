@@ -137,7 +137,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;NO_WEBUI_LOG;CEMBED_TRANSLATE;USE_CEMBED;EMBEDDED_ROOT_DIR="C:\\magi-tattoos";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;NO_WEBUI_LOG;CEMBED_TRANSLATE;USE_CEMBED;EMBEDDED_ROOT_DIR="C:\\website";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>..\vendor\webui\src;..\vendor\webui\src\include;..\src\;..\vendor\webview;..\vendor\webview2\build\native\include;..\vendor\c-embed;..\vendor\dirent\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
