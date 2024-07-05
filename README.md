@@ -7,7 +7,7 @@
 
 </div>
 
-Leverage a UI that uses web technologies (html, css, javascript, or even svelte's adapter-static) to drive native C++ applications with no internet connection or external dependencies.
+Leverage a UI that uses web technologies (html, css, javascript, ie static site generation) to drive native C++ applications without internet connection or external dependencies.
 
 This is accomplished by filling the native UI Window with a Microsoft WebView2 component, and navigating the WebView to an embedded webserver.
 
@@ -98,7 +98,7 @@ Updated with webui C++ wrapper and a busy loop invoking a javascript function to
 
 Updated with c-embed to package interface assets directly into the application
 
-Using civetweb (via webui), we can run an entire website from a local directory (or more elaborate backend features with effort).
+Using civetweb (via webui), we can run an entire website from a local directory (or more elaborate backend features with additional effort).
 
 Updated with a Webview (https://github.com/webview/webview) front end component. This may get removed or replaced.
 
@@ -110,24 +110,24 @@ Verified with BeeNum and pure javascript Calculator
 
 Verified with svelte project using adapter-static
 
-Note that Webview2 is not required for redistributing on most Win10+ systems
+Note that Webview2 dll is not required for redistributing on most Win10+ systems
 
-Note that one expectation for this project is to make this work cross-platform via gcc+gtk
+Note that one expectation for this project is to make it work cross-platform via gcc+gtk
 
 
 ## TODO
 - [ ] Modify c-embed to ignore the path prefix (ie "C:\my-files\")
-- [ ] Update webui to use version 2.5
 - [ ] Fix window initialization code to be closer to the original template
 - [ ] Refactor initialization into an interface
 - [ ] Refactor Windows Resource into platform-specific feature
 - [ ] Integrate with forked version of webui
-- [ ] Integrate with forked version of civetweb
 - [ ] Integrate with forked version of c-embed
 - [ ] [Feature] Add 'Press any key': C++ input handler
 - [ ] [Feature] Add 'Press any key': next.html
 - [ ] Refactor msys2-ucrt invocations to use a Preprocessor Definition
 - [ ] Update README with instructions for non-default msys2 installation location
+- [x] Update webui to use version 2.5-beta
+- [x] Add pre-build steps to invoke c-embed
 - [x] Integrate webui build into project
 - [x] Fix current build issues due to external dependencies
 - [x] Impl write index (+subdir) to appdata [bin2cpp] [using c-embed instead]
@@ -149,8 +149,7 @@ Note that one expectation for this project is to make this work cross-platform v
 
 ### Possible additions
 - [ ] Build civetweb with Duktape support
-- [ ] Integrate a database
-- [ ] Add pre-build steps to invoke c-embed
+- [ ] Integrate local file IO
 - [ ] Add gradle or cmake or similar
 - [ ] Create a new project for MSI packaging
 
