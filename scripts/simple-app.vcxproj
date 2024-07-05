@@ -120,12 +120,12 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(Outdir)\cembed_tmp\cembed.fs.o;$(Outdir)\cembed_tmp\cembed.map.o;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\vendor\webui\lib\windows-msvc-x64\debug\;..\vendor\webview2\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy "$(SolutionDir)..\website\" "$(TargetDir)" /y /s</Command>
+      <Message>Copy website assets into output directory...</Message>
     </PostBuildEvent>
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -142,7 +142,7 @@
       <AdditionalIncludeDirectories>..\vendor\webui\src;..\vendor\webui\src\include;..\src\;..\vendor\webview;..\vendor\webview2\build\native\include;..\vendor\c-embed;..\vendor\dirent\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <Optimization>MinSpace</Optimization>
+      <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -159,6 +159,12 @@
     <ResourceCompile>
       <AdditionalIncludeDirectories>..\src\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <PreBuildEvent>
+      <Command>cd $(Outdir) &amp;&amp; c-embed.exe "C:\website"</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Generate c-embed objects...</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\src\framework.h" />

@@ -14,9 +14,6 @@
 #if defined(USE_BEENUM)
 #include "BeeNum/Math.h"
 #endif // USE_BEENUM
-#if defined(USE_CEMBED)
-#include "c-embed.h"
-#endif // USE_CEMBED
 
 using std::string;
 using std::string_view;
@@ -374,7 +371,7 @@ HWND CreateScreen(win32_window* w)
 int invokeUiMain(_In_ LPWSTR    lpCmdLine,
     _In_ int       nCmdShow) {
 
-#if defined(_DEBUG)
+#if defined(_DEBUG) || 1
     // Redirect cout to file 'console.log'
     setupCout();
 
@@ -414,10 +411,10 @@ int invokeUiMain(_In_ LPWSTR    lpCmdLine,
     // using browser=NoBrowser(0) to avoid spawning
     //  instances of a locally-installed browser via webui
     webserver.show_browser("index.html", 0);
-    cout << "port: " << webserver.get_server_port() << endl;
+    cout << "port: " << webserver.get_port() << endl;
 
     ostringstream url;
-    url << "http://localhost:" << webserver.get_server_port() << "/index.html";
+    url << "http://localhost:" << webserver.get_port() << "/index.html";
 
     // In case the App size should adapt to the Desktop resolution
     int horizontal = 0;

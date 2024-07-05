@@ -1,4 +1,14 @@
-/* Copyright (c) 2013-2021 the Civetweb developers
+// Disable All Warnings
+#ifdef _MSC_VER
+#pragma warning(push, 0)
+#pragma warning(disable: 4996)
+#elif defined(__clang__)
+#pragma clang system_header
+#elif defined(__GNUC__)
+#pragma GCC system_header
+#endif
+
+/* Copyright (c) 2013-2024 the Civetweb developers
  * Copyright (c) 2004-2013 Sergey Lyubka
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy

@@ -1,7 +1,14 @@
-
 #include "c-embed.h"
 #include <dirent.h>
-//#include <string.h>
+
+#if !defined(USE_CEMBED)
+char cembed_map_start; // Embedded Indexing Structure
+char cembed_map_end;
+char cembed_map_size;
+char cembed_fs_start;  // Embedded Virtual File System
+char cembed_fs_end;
+char cembed_fs_size;
+#endif // USE_CEMBED
 
 typedef struct EFILE_S EFILE;
 __thread int eerrcode = 0;
@@ -100,16 +107,17 @@ bool eeof(EFILE* e) {
 
 size_t eread(void* ptr, size_t size, size_t count, EFILE* stream) {
 
-    if (stream->end - stream->pos < size * count) {
+    size_t rcount = size * count;
+    if (stream->end - stream->pos < rcount) {
         size_t scount = stream->end - stream->pos;
         memcpy(ptr, (void*)stream->pos, scount);
         stream->pos = stream->end;
-        return (scount / size);
+        return scount;
     }
 
-    memcpy(ptr, (void*)stream->pos, size * count);
-    stream->pos += size * count;
-    return count;
+    memcpy(ptr, (void*)stream->pos, rcount);
+    stream->pos += rcount;
+    return rcount;
 
 }
 
@@ -144,7 +152,7 @@ int egetc(EFILE* stream) {
 }
 
 long int etell(EFILE* e) {
-    return (e->end - e->pos) - e->size;
+    return e->size - (e->end - e->pos);
 }
 
 void erewind(EFILE* e) {
@@ -168,5 +176,3 @@ int eseek(EFILE* stream, long int offset, int origin) {
     return 0;
 
 }
-
-
