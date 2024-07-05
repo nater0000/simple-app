@@ -110,16 +110,16 @@ string GetAppDir()
     char buffer[MAX_LOADSTRING] = { 0 };
     size_t bufferSize = sizeof(buffer);
 
-    // Fallback to using the current directory
-    DWORD result = GetCurrentDirectoryA(MAX_LOADSTRING, buffer);
-    if (0 == result) {
-        appdataPath = buffer;
-    }
-
     err = getenv_s(&ret, buffer, bufferSize, "APPDATA");
     if (ret > 0 && 0 == err) {
         appdataPath = string(buffer) + "\\Simple-App";
         //appdataPath = string(buffer);
+    }
+
+    // Fallback to using the current directory
+    DWORD result = GetCurrentDirectoryA(MAX_LOADSTRING, buffer);
+    if (0 != result) {
+        appdataPath = buffer;
     }
 
     err = getenv_s(&ret, buffer, bufferSize, "HTML_PATH");

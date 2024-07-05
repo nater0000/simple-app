@@ -60,7 +60,6 @@
     // ...
 #endif
 
-
 // -- Defines -------------------------
 #define WEBUI_SIGNATURE      0xDD    // All packets should start with this 8bit
 #define WEBUI_CMD_JS         0xFE    // Command: JavaScript result in frontend
@@ -623,10 +622,11 @@ static WEBUI_THREAD_WEBVIEW;
 static WEBUI_THREAD_MONITOR;
 
 // Safe C STD
-#if defined(_WIN32)
+#ifdef _WIN32
 #define WEBUI_STR_TOK(str, delim, context) strtok_s(str, delim, context)
 #if defined(USE_CEMBED)
-#define WEBUI_FILE_OPEN(file, filename, mode) ((file) = fopen(filename, mode))
+// fopen_s returns 0 on success
+#define WEBUI_FILE_OPEN(file, filename, mode) (((file) = fopen(filename, mode)) ? 0 : errno)
 #else // USE_CEMBED
 #define WEBUI_FILE_OPEN(file, filename, mode) fopen_s(&file, filename, mode)
 #endif // USE_CEMBED
@@ -7466,7 +7466,7 @@ static void _webui_http_send_file(
 
     // Open the file
     FILE* file = NULL;
-    if (WEBUI_FILE_OPEN(file, path, "rb") == 0 || !file) {
+    if (WEBUI_FILE_OPEN(file, path, "rb") != 0 || !file) {
         #ifdef WEBUI_LOG
         printf("[Core]\t\t_webui_http_send_file() -> Can't open file [%s]\n", path);
         #endif
