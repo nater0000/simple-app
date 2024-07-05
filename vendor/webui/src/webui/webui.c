@@ -7276,7 +7276,7 @@ static void _webui_init(void) {
 
     // Random
     #ifdef _WIN32
-    srand((size_t) time(NULL));
+    srand((unsigned int) time(NULL));
     #else
     srand(time(NULL));
     #endif
